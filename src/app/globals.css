@@ -1,26 +1,254 @@
 @import "tailwindcss";
 
+@theme {
+  /* Custom Colors */
+  --color-cream: #f8f6d6;
+  --color-primary: #2c5234;
+
+  /* Background Colors */
+  --color-background: #f8f6d6;
+  --color-foreground: #2c5234;
+
+  /* Additional theme colors using your palette */
+  --color-cream-50: #fefef5;
+  --color-cream-100: #f8f6d6;
+  --color-cream-200: #f2efc7;
+  --color-cream-300: #ece8b8;
+  --color-cream-400: #e6e1a9;
+  --color-cream-500: #e0da9a;
+  --color-cream-600: #ddd38b;
+  --color-cream-700: #d7cc7c;
+  --color-cream-800: #d1c56d;
+  --color-cream-900: #cbbe5e;
+
+  --color-primary-50: #f0f2f1;
+  --color-primary-100: #d9e0db;
+  --color-primary-200: #b3c6b7;
+  --color-primary-300: #8dad93;
+  --color-primary-400: #67936f;
+  --color-primary-500: #2c5234;
+  --color-primary-600: #284a2f;
+  --color-primary-700: #24422a;
+  --color-primary-800: #203a25;
+  --color-primary-900: #1c3220;
+
+  /* Typography */
+  --font-ppeditorial: var(--font-ppeditorial);
+  --font-synonym: var(--font-synonym);
+
+  /* Border Radius - NO ROUNDED CORNERS */
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 0px;
+
+  /* Spacing Scale */
+  --spacing: 0.25rem;
+}
+
+/* Reset all border-radius to 0 */
+* {
+  border-radius: 0 !important;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: var(--color-cream);
+  --foreground: var(--color-primary);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-brandon);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Font utility classes */
+.font-editorial {
+  font-family: var(--font-ppeditorial);
+}
+
+.font-synonym {
+  font-family: var(--font-synonym);
+}
+
+/* Base fancy button styles */
+.fancy {
+  background-color: transparent;
+  border-radius: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 1.25em 2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 11px;
+  min-width: 150px;
+  font-family: var(--font-synonym);
+}
+
+.fancy::before {
+  content: " ";
+  width: 1.5625rem;
+  height: 2px;
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+.fancy .text {
+  font-size: 1.125em;
+  line-height: 1.33333em;
+  padding-left: 2em;
+  display: block;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.fancy .top-key {
+  height: 2px;
+  width: 1.5625rem;
+  top: -2px;
+  left: 0.625rem;
+  position: absolute;
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.fancy .bottom-key-1 {
+  height: 2px;
+  width: 1.5625rem;
+  right: 1.875rem;
+  bottom: -2px;
+  position: absolute;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy .bottom-key-2 {
+  height: 2px;
+  width: 0.625rem;
+  right: 0.625rem;
+  bottom: -2px;
+  position: absolute;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy:hover {
+  transform: translateY(-2px);
+}
+
+.fancy:hover::before {
+  width: 0.9375rem;
+}
+
+.fancy:hover .text {
+  padding-left: 1.5em;
+}
+
+.fancy:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.fancy:hover .bottom-key-1,
+.fancy:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
+}
+
+/* Cream variant - for navigation on dark backgrounds */
+.fancy-cream {
+  border: 2px solid var(--color-cream);
+  color: var(--color-cream);
+}
+
+.fancy-cream::before {
+  background: var(--color-cream);
+}
+
+.fancy-cream .text {
+  color: var(--color-cream);
+}
+
+.fancy-cream:hover {
+  color: var(--color-primary);
+  background: var(--color-cream);
+  box-shadow: 0 4px 12px rgba(248, 246, 214, 0.3);
+}
+
+.fancy-cream:hover::before {
+  background: var(--color-primary);
+}
+
+.fancy-cream:hover .text {
+  color: var(--color-primary);
+}
+
+/* Green variant - for light backgrounds */
+.fancy-green {
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.fancy-green::before {
+  background: var(--color-primary);
+}
+
+.fancy-green .text {
+  color: var(--color-primary);
+}
+
+.fancy-green:hover {
+  color: var(--color-cream);
+  background: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(44, 82, 52, 0.3);
+}
+
+.fancy-green:hover::before {
+  background: var(--color-cream);
+}
+
+.fancy-green:hover .text {
+  color: var(--color-cream);
+}
+
+/* Override any default button styles */
+button,
+.btn {
+  border-radius: 0 !important;
+}
+
+/* Ensure all elements have no rounded corners */
+input,
+textarea,
+select,
+div,
+section,
+article,
+aside,
+nav,
+header,
+footer,
+main {
+  border-radius: 0 !important;
 }
