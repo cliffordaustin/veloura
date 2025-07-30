@@ -195,21 +195,6 @@ export default function RoomsShowcase() {
     setSelectedRoom(null);
   };
 
-  const navigateRoom = (direction: "prev" | "next") => {
-    if (!selectedRoom) return;
-
-    const currentIndex = rooms.findIndex((room) => room.id === selectedRoom.id);
-    let newIndex;
-
-    if (direction === "prev") {
-      newIndex = currentIndex === 0 ? rooms.length - 1 : currentIndex - 1;
-    } else {
-      newIndex = currentIndex === rooms.length - 1 ? 0 : currentIndex + 1;
-    }
-
-    setSelectedRoom(rooms[newIndex]);
-  };
-
   return (
     <section
       id="rooms"
@@ -317,11 +302,7 @@ export default function RoomsShowcase() {
               </Dialog.Title>
             </VisuallyHidden.Root>
             {selectedRoom && (
-              <RoomModal
-                room={selectedRoom}
-                onClose={closeModal}
-                onNavigate={navigateRoom}
-              />
+              <RoomModal room={selectedRoom} onClose={closeModal} />
             )}
           </Dialog.Content>
         </Dialog.Portal>
@@ -393,15 +374,7 @@ function RoomCard({
   );
 }
 
-function RoomModal({
-  room,
-  onClose,
-  onNavigate,
-}: {
-  room: Room;
-  onClose: () => void;
-  onNavigate: (direction: "prev" | "next") => void;
-}) {
+function RoomModal({ room, onClose }: { room: Room; onClose: () => void }) {
   const imageSwiperRef = useRef<SwiperType | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
