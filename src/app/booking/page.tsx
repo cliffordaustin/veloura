@@ -355,7 +355,6 @@ function BookingForm() {
               </h3>
 
               <div className="space-y-6">
-                {/* Spa Specific Fields */}
                 {formData.bookingType === "spa" && (
                   <>
                     <div>
