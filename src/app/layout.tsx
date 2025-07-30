@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   title: "Veloura",
-  description: "Built with Tailwind CSS v4",
+  description: "Veloura luxury hotel",
 };
 
 const ppeditorial = localFont({

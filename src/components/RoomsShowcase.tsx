@@ -211,7 +211,10 @@ export default function RoomsShowcase() {
   };
 
   return (
-    <section className="bg-cream py-8 sm:py-12 px-4 relative overflow-hidden">
+    <section
+      id="rooms"
+      className="bg-cream py-8 sm:py-12 px-4 relative overflow-hidden"
+    >
       <div className="flex justify-center mb-4 sm:mb-8">
         <RotatingTextCircle text="Veloura • " />
       </div>

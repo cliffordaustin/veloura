@@ -3,11 +3,18 @@
 import { useState, useEffect } from "react";
 import FancyButton from "./FancyButton";
 import { Button } from "./ui/button";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navItems = ["ROOMS", "OFFERS", "EVENTS", "EXPLORE", "CALENDAR"];
+  const navItems = [
+    { label: "HOME", href: "/" },
+    { label: "SPA & WELLNESS", href: "/booking?type=spa" },
+    { label: "EVENT SPACES", href: "/booking?type=events" },
+    { label: "BUSINESS CENTER", href: "/booking?type=business" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +31,17 @@ export default function Navigation() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const scrollToRooms = () => {
+    const roomsSection = document.getElementById("rooms");
+    if (roomsSection) {
+      roomsSection.scrollIntoView({ behavior: "smooth" });
+    }
+    // Close mobile menu if open
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <>
       <nav
@@ -33,29 +51,48 @@ export default function Navigation() {
       >
         <div className="flex items-center justify-between px-4 md:px-8 py-4 md:py-6">
           {/* Left side - Logo/Brand */}
-          <div
+          {/* <div
             className={`font-editorial text-lg md:text-xl tracking-wider transition-colors duration-300 ${
               isScrolled ? "text-primary" : "text-cream"
             }`}
           >
             VELOURA
-          </div>
+          </div> */}
+
+          <Link href="/">
+            {isScrolled ? (
+              <Image
+                src="/images/logo/green.png"
+                alt="Veloura"
+                width={60}
+                height={60}
+              />
+            ) : (
+              <Image
+                src="/images/logo/cream.png"
+                alt="Veloura"
+                width={60}
+                height={60}
+              />
+            )}
+          </Link>
 
           {/* Center - Navigation Items - Hidden on mobile */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Button
-                key={item}
-                variant="link"
-                underlineColor={isScrolled ? "green" : "cream"}
-                className={`font-synonym text-sm tracking-widest transition-colors duration-300 ${
-                  isScrolled
-                    ? "text-black hover:text-black/70"
-                    : "text-cream hover:text-cream-300"
-                }`}
-              >
-                {item}
-              </Button>
+              <Link key={item.label} href={item.href}>
+                <Button
+                  variant="link"
+                  underlineColor={isScrolled ? "green" : "cream"}
+                  className={`font-synonym text-sm tracking-widest transition-colors duration-300 ${
+                    isScrolled
+                      ? "text-black hover:text-black/70"
+                      : "text-cream hover:text-cream-300"
+                  }`}
+                >
+                  {item.label}
+                </Button>
+              </Link>
             ))}
           </div>
 
@@ -67,6 +104,7 @@ export default function Navigation() {
                 gapClassName={isScrolled ? "bg-cream" : "bg-black"}
                 variant={isScrolled ? "green" : "cream"}
                 size="sm"
+                onClick={scrollToRooms}
               >
                 BOOK A ROOM
               </FancyButton>
@@ -119,15 +157,16 @@ export default function Navigation() {
               {/* Navigation Items */}
               <nav className="flex flex-col space-y-6 mb-8">
                 {navItems.map((item) => (
-                  <Button
-                    key={item}
-                    variant="link"
-                    underlineColor="green"
-                    className="font-synonym text-lg tracking-widest text-primary hover:text-primary/70 justify-start"
-                    onClick={toggleMobileMenu}
-                  >
-                    {item}
-                  </Button>
+                  <Link key={item.label} href={item.href}>
+                    <Button
+                      variant="link"
+                      underlineColor="green"
+                      className="font-synonym text-lg tracking-widest text-primary hover:text-primary/70 justify-start"
+                      onClick={toggleMobileMenu}
+                    >
+                      {item.label}
+                    </Button>
+                  </Link>
                 ))}
               </nav>
 
@@ -137,7 +176,7 @@ export default function Navigation() {
                   gapClassName="bg-cream"
                   variant="green"
                   className="w-full"
-                  onClick={toggleMobileMenu}
+                  onClick={scrollToRooms}
                 >
                   BOOK A ROOM
                 </FancyButton>

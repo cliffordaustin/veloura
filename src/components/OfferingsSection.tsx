@@ -162,7 +162,10 @@ export default function OfferingsSection() {
   };
 
   return (
-    <section className="bg-cream pb-16 sm:pb-20 lg:pb-24 px-4 relative overflow-hidden">
+    <section
+      id="offerings"
+      className="bg-cream pb-16 sm:pb-20 lg:pb-24 px-4 relative overflow-hidden"
+    >
       {/* Enhanced background decorative elements */}
       <div className="absolute top-32 right-20 w-24 h-24 border border-primary/8 transform rotate-45" />
       <div className="absolute top-96 left-16 w-16 h-16 border border-primary/8 transform -rotate-12" />
